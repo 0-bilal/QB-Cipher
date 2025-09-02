@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QB-Cipher</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+          <link rel="icon" type="image/x-icon" href="ico/Cipher.ico">
+</head>
+<body>
+  <div class="app">
+    <button class="mobile-toggle" onclick="toggleSettings()">
+      <span class="icon">⚙️</span>
+    </button>
+
+    <!-- Sidebar / Settings -->
+    <aside class="settings-panel" id="settingsPanel">
+      <div class="brand">
+        <div class="logo-3d">🔐</div>
+        <div class="brand-text">
+          <h1>QB-Cipher</h1>
+          <p>دردشة مشفرة آمنة</p>
+        </div>
+      </div>
+
+      <div class="fieldset">
+        <label for="roomId"><span class="icon">#️⃣</span>معرف الغرفة</label>
+        <input id="roomId" type="text" placeholder="مثال: waad-2025-room">
+      </div>
+
+      <div class="fieldset">
+        <label for="userId"><span class="icon">👤</span>معرفك</label>
+        <input id="userId" type="text" placeholder="مثال: Bilal">
+      </div>
+
+      <div class="fieldset">
+        <label for="aesKey"><span class="icon">🔑</span>مفتاح AES-GCM</label>
+        <div class="row">
+          <button id="genAES" class="btn pill ghost" title="توليد مفتاح جديد">
+            <span class="icon">🎲</span>
+          </button>
+          <button id="pasteAES" class="btn pill ghost" title="لصق من الحافظة">
+            <span class="icon">📥</span>
+          </button>
+          <button id="copyAES" class="btn pill ghost" title="نسخ المفتاح">
+            <span class="icon">📋</span>
+          </button>
+          <button id="clearAES" class="btn pill ghost" title="مسح المفتاح">
+            <span class="icon">🗑️</span>
+          </button>
+        </div>
+        <input id="aesKey" class="mono" type="text" placeholder="ألصق المفتاح هنا أو قم بتوليده…">
+        <small class="hint">🛡️ يستخدم لتشفير الرسائل بشكل آمن</small>
+      </div>
+
+      <div class="fieldset">
+        <label for="hmacKey"><span class="icon">🛡️</span>مفتاح HMAC-SHA256</label>
+        <div class="row">
+          <button id="genHMAC" class="btn pill ghost" title="توليد مفتاح جديد">
+            <span class="icon">🎲</span>
+          </button>
+          <button id="pasteHMAC" class="btn pill ghost" title="لصق من الحافظة">
+            <span class="icon">📥</span>
+          </button>
+          <button id="copyHMAC" class="btn pill ghost" title="نسخ المفتاح">
+            <span class="icon">📋</span>
+          </button>
+          <button id="clearHMAC" class="btn pill ghost" title="مسح المفتاح">
+            <span class="icon">🗑️</span>
+          </button>
+        </div>
+        <input id="hmacKey" class="mono" type="text" placeholder="ألصق المفتاح هنا أو قم بتوليده…">
+        <small class="hint">🔍 يستخدم للتحقق من سلامة الرسائل</small>
+      </div>
+
+      <div class="actions">
+        <button id="saveSettings" class="btn primary">
+          <span class="icon">💾</span>حفظ الإعدادات
+        </button>
+        <button id="clearMessages" class="btn ghost">
+          <span class="icon">🧹</span>مسح المحادثة
+        </button>
+      </div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="chat">
+      <header class="chat-header">
+        <div class="room-title">
+          <span class="status-dot" id="statusDot"></span>
+          <div>
+            <div class="room" id="roomLabel">—</div>
+            <div class="sub" id="userLabel">—</div>
+          </div>
+        </div>
+        <div class="hdr-actions">
+          <button id="reconnect" class="btn ghost sm">
+            <span class="icon">🔄</span>تحديث
+          </button>
+        </div>
+      </header>
+
+      <section id="chatList" class="chat-list" aria-live="polite">
+        <!-- رسائل تجريبية -->
+        <article class="msg me">
+          <div class="from">مرحبا</div>
+          <div class="text">مرحباً بك في QB-Cipher! تطبيق الدردشة المشفرة الآمن 🔐</div>
+          <div class="meta">
+            <span class="badge">محقق</span>
+            <span class="time">الآن</span>
+          </div>
+        </article>
+      </section>
+
+      <footer class="composer">
+        <textarea id="messageInput" rows="1" placeholder="اكتب رسالتك الآمنة... (Ctrl + Enter للإرسال)"></textarea>
+        <button id="sendBtn" class="btn primary">
+          <span class="icon">🚀</span>إرسال
+        </button>
+      </footer>
+    </main>
+  </div>
+
+  <div id="messageContainer"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
